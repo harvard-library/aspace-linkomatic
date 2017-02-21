@@ -1,0 +1,13 @@
+en:
+  resource:
+    _frontend:
+      action:
+        fetch_digital_objects: Fetch Digital Objects
+  linkomatic:
+    owner-code-label: Owner Code
+    owner-code:
+      actions:
+        submit: Fetch Digital Objects
+    fetch_results:
+        actions:
+            close: "Close"

@@ -1,0 +1,23 @@
+<div id="owner_code_template">
+	<div class="ownercode-wrapper">
+  		<%= form_tag({controller: "linkomatic", action: "fetch_digital_objects"}, method: "get", id: "owner_code_form") do |form| %>
+	    <div class="modal-body">
+	    	
+			<div class="form-group">
+	    		<label class="control-label" for="ownerCodeSelectList"><%= I18n.t("linkomatic.owner-code-label") %></label>  	
+	     		<input id="owner_code_text" name="other" placeholder="Owner Code"/>
+			</div>
+			<input type="hidden" name="resource_id" id="resource-id"/>
+			<div id="fetchProgress" style="display: none;">
+              <p>Fetching URNs. If this resource has a large number of archival objects, this process could be lengthy.<br/>
+              Navigating away from the page will terminate the retrieval. </p>
+            </div>
+    	</div>
+  		<div class="modal-footer">
+    		<button id="fetchDigitalObjectsButton" class="btn btn-primary"><%= I18n.t("linkomatic.owner-code.actions.submit") %></button>
+    		<button class="btn btn-cancel btn-default" data-dismiss="modal"><%= I18n.t "actions.cancel" %></button>
+  		</div>
+  		<% end %>
+	</div>
+
+</div>
