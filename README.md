@@ -32,6 +32,7 @@ For example, in config.rb:
 ```
 ## You may have other plugins
 AppConfig[:plugins] = ['local', 'aspace-linkomatic']
+```
 
 Known Issues
 -------------
