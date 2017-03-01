@@ -1,4 +1,3 @@
-require '../backend/app/lib/job_runner'
 require_relative 'urn_fetcher'
   
 class FetchUrnRunner < JobRunner
