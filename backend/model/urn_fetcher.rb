@@ -13,8 +13,8 @@ class URNFetcher
   # Url parts and helpers                          #
   ##################################################
 
-  NRS_SERVER = "#{ENV.fetch('NRS_URL', 'http://nrstest.harvard.edu:9031/')}"
-  OLIVIA = URI("#{ENV.fetch('OLIVIA_URL', 'http://oliviatest.lib.harvard.edu:9016')}/olivia/servlet/OliviaServlet")
+  NRS_SERVER = AppConfig.has_key?(:nrs_url) ? AppConfig[:nrs_url] : 'http://nrstest.harvard.edu:9031/'
+  OLIVIA = AppConfig.has_key?(:olivia_url) ? URI(AppConfig[:olivia_url] + "/olivia/servlet/OliviaServlet") : URI('http://oliviatest.lib.harvard.edu:9016/olivia/servlet/OliviaServlet')
   OID_Q_BASE = {storedProcedure: "getOracleID",
                 callingApplication: "OASIS"}
   OID_Q_OPTS = {quality: "NA",
@@ -167,7 +167,7 @@ private
     ao_response = nil
     begin
       ao_object = ArchivalObject.get_or_die(archival_object.id)
-    qao = ao_object.update_from_json(archival_object)
+      ao = ao_object.update_from_json(archival_object)
       ao_response = ao.id
       Log.info("UPDATE AO RESPONSE: " + ao_response.to_s)
     rescue Exception => e
