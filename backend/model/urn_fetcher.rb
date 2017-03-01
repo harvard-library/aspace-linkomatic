@@ -13,8 +13,8 @@ class URNFetcher
   # Url parts and helpers                          #
   ##################################################
 
-  NRS_SERVER = "#{ENV.fetch('NRS_URL', 'http://nrstest.harvard.edu:9031/')}"
-  OLIVIA = URI("#{ENV.fetch('OLIVIA_URL', 'http://oliviatest.lib.harvard.edu:9016')}/olivia/servlet/OliviaServlet")
+  NRS_SERVER = AppConfig.has_key?(:nrs_url) ? AppConfig[:nrs_url] : 'http://nrstest.harvard.edu:9031/'
+  OLIVIA = AppConfig.has_key?(:olivia_url) ? URI(AppConfig[:olivia_url] + "/olivia/servlet/OliviaServlet") : URI('http://oliviatest.lib.harvard.edu:9016/olivia/servlet/OliviaServlet')
   OID_Q_BASE = {storedProcedure: "getOracleID",
                 callingApplication: "OASIS"}
   OID_Q_OPTS = {quality: "NA",

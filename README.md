@@ -36,7 +36,12 @@ Setup
 	```
 	AppConfig[:db_url] = "jdbc:mysql://<server>/<dbname>?useUnicode=true&characterEncoding=UTF-8&user=<username>&password=<password>"
 	```
-
+    
+    * set the NRS and OLIVIA urls:
+    ```
+    AppConfig[:nrs_url] = <NRS BASE URL>
+    AppConfig[:olivia_url] = <OLIVIA BASE URL
+    ```
 
 Known Issues
 -------------
