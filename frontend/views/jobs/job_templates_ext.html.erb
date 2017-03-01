@@ -3,8 +3,8 @@
   <% define_template "fetch_urn_job", jsonmodel_definition(:fetch_urn_job) do |form, job| %>
 
       <div class="form-group">
-      	<label class="control-label"><%= I18n.t("linkomatic.target")  %></label>
-        <%= link_to I18n.t("actions.view"), {:controller => :resolver, :action => :resolve_readonly, :uri => job["source"]}, :class => "btn btn-xs btn-default" %>
+      	<label class="col-sm-3 control-label"><%= I18n.t("linkomatic.target")  %></label>
+        <div class="col-sm-9"><%= link_to I18n.t("actions.view"), {:controller => :resolver, :action => :resolve_readonly, :uri => job["source"]}, :class => "btn btn-xs btn-default" %></div>
       </div>
 
   <% end %>
