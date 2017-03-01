@@ -224,7 +224,7 @@ private
   #Fetch the URN for the archival object with the user-entered owner code
   #and the archival object's ref_id (the OSN)
   def fetch_urn(osn)
-    Log.info "Fetching: #{@owner_code} : #{osn}'s OID"
+    Log.info "Fetching: #{@owner_code} : #{osn}'s OID from OLIVIA #{OLIVIA.host}"
     oid = nil
     urns = nil
     actionable_urn = nil
