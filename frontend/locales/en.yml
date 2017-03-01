@@ -11,3 +11,13 @@ en:
     fetch_results:
         actions:
             close: "Close"
+            submit: "Go to Background Job"
+    enumerations:
+        job_type:
+           fetch_urn_job: Fetch Digital Object Job
+    target: Target Resource
+  enumerations:
+    job_type:
+        fetch_urn_job: Fetch Digital Object Job
+  fetch_urn_job:
+    owner_code: Owner Code

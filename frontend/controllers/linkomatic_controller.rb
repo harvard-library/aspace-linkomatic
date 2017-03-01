@@ -1,6 +1,6 @@
 class LinkomaticController < ApplicationController
  
-  require 'urn_fetcher'
+  #require 'urn_fetcher'
   #skip_before_filter :unauthorised_access
   set_access_control "view_repository" => [:fetch_digital_objects, :clear_fetch_session, :in_fetch_session, :digital_objects_fetched]
   
@@ -8,18 +8,20 @@ class LinkomaticController < ApplicationController
     
   def fetch_digital_objects
     if user_can?('update_digital_object_record') && user_can?('view_repository')
-      owner_code = params[:other]
-      current_repo = session[:repo_id]
-      resource_id = params[:resource_id]
         
-      session[:fetch_digital_object_resource_ids] ||= []
-      if !session[:fetch_digital_object_resource_ids].include?(resource_id)
-        session[:fetch_digital_object_resource_ids] << resource_id
-      end
+      job_data = {"repo_id" => session[:repo_id].to_s,
+                  "owner_code" => params[:other],
+                  "resource_id" => params[:resource_id],
+                  "source" => "/repositories/" + session[:repo_id].to_s + "/resources/" + params[:resource_id]}
+        
+      fetch_job = JSONModel(:fetch_urn_job).from_hash(job_data)
+        
+      job = Job.new("fetch_urn_job", fetch_job, [])
       
-      response = URNFetcher.new.perform(resource_id, owner_code, session[:repo_id])
-      Rails.logger.info(response)
-      clear_fetch_session
+      jobresponse = job.upload
+      #TODO: Fix this
+      response = {:success => jobresponse['id']}
+      
       render :json => response.to_json
     else
       unauthorised_access

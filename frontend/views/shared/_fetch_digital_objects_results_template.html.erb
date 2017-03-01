@@ -1,22 +1,13 @@
 <div id="fetch_digital_objects_results_template">
 	<div class="modal-body">
-		<%= form_tag({:controller => :resources, :action => :show, :id => @resource.id}, method: "get", id: "fetch_results_form") do |form| %>
-		    <p><strong>Digital Objects created for Resource "${resource_id}"</a></strong></p>
-			
-			<p>
-				Number of Archival Objects searched: <%="${archival_objects_searched}"%>
-				<br/>Number of Digital Objects created: <%="${digital_objects_created}"%>
-				
-				{if osn_errors.length > 0}
-					<br/>Erros occured in creating Digital Objects for: <%="${osn_errors}"%>
-				{/if}
-				
-				{if no_osns.length > 0}
-					<br/>No Digital Objects exist for: <%="${no_osns}"%>
-				{/if}
-			</p>
+		<%= form_tag({:controller => :jobs, :action => :index}, method: "get", id: "fetch_results_form") do |form| %>
+		    
+		    <div id="fetchProgress">
+              <p>The Fetch URNs job has been set up as a background job. You can view the status of this job on the Background Jobs page.</p>
+            </div>
 			
 			<div class="modal-footer">
+				<button id="fetchDigitalObjectsButton" class="btn btn-primary"><%= I18n.t("linkomatic.fetch_results.actions.submit") %></button>
 	  			<button class="btn btn-default btn-primary"><%= I18n.t "linkomatic.fetch_results.actions.close" %></button>
 	  		</div>
   		<% end %>

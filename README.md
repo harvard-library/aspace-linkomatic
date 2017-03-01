@@ -26,13 +26,17 @@ Setup
 
 * Edit config.rb to:
 	* activate the `aspace-linkomatic` plugin
+	For example, in config.rb:
 	
-For example, in config.rb:
+	```
+	## You may have other plugins
+	AppConfig[:plugins] = ['local', 'aspace-linkomatic']
+	```
+	* set the database info: 
+	```
+	AppConfig[:db_url] = "jdbc:mysql://<server>/<dbname>?useUnicode=true&characterEncoding=UTF-8&user=<username>&password=<password>"
+	```
 
-```
-## You may have other plugins
-AppConfig[:plugins] = ['local', 'aspace-linkomatic']
-```
 
 Known Issues
 -------------

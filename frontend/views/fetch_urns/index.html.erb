@@ -1,0 +1,45 @@
+<%= setup_context :title => "Fetch URNs" %>
+
+<div class="row">
+
+    <%= render_aspace_partial :partial => "shared/flash_messages" %>
+
+    <%= form_for @job, :as => "job", :url => {:action => :create}, :html => {:id => "fetch_urn_job", :class => 'form-horizontal aspace-record-form',  :multipart => true} do |form| %>
+       <%= form_context :job, @job do |form| %> 
+          <div class="record-pane">
+            <%= link_to_help :topic => "job" %>
+            <h2><%= I18n.t("job._frontend.actions.new") %></h2>
+
+            <%= render_aspace_partial :partial => "shared/form_messages", :locals => {:object => @job, :form => form} %>
+            <%= render_aspace_partial :partial => "resources/linker", :locals => { :form => form, :field_label => 'Base Resource Record' }%>
+            <input id="fetch_urns_job_jsonmodel_type_" name="fetch_urn_job[jsonmodel_type]" type="hidden" value="fetch_urn_job"/>
+            <div class="form-actions">
+              <div class="btn-group">
+                <button type="submit" class="btn btn-primary"><%= I18n.t("job._frontend.actions.save") %></button>
+                <button id="allNRepo" data-repo-uri='/repositories/<%= current_repo.id %>' class="btn btn-warning">All In This Repo</button>
+                <%= link_to I18n.t("actions.cancel"), :back, :class => "btn btn-cancel btn-default" %>
+              </div>
+            </div>
+          </div>
+    <% end %> 
+  <% end %> 
+
+
+  <script>
+    $(function() {
+        $(".linker:not(.initialised)").linker();
+        $("#allNRepo").on( 'click', function(event) {
+          event.preventDefault();
+          $form = $(this).parents('form:first'); 
+          var repo_uri = $(this).data("repo-uri"); 
+          $("#token-input-job_ref_").val(repo_uri);
+          $("#token-input-job_ref_").prop("readonly", true);
+          $(".dropdown-toggle").remove();      
+          $form.append("<input name='job[ref]' value='" + repo_uri + "' type='hidden'>"); 
+        });  
+       
+       
+    });
+  </script>
+
+</div>
