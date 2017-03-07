@@ -10,7 +10,7 @@ class LinkomaticController < ApplicationController
     if user_can?('update_digital_object_record') && user_can?('view_repository')
         
       job_data = {"repo_id" => session[:repo_id].to_s,
-                  "owner_code" => params[:other],
+                  "owner_code" => params[:other].upcase,
                   "resource_id" => params[:resource_id],
                   "source" => "/repositories/" + session[:repo_id].to_s + "/resources/" + params[:resource_id]}
         

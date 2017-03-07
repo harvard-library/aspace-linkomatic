@@ -10,7 +10,7 @@ class FetchUrnsController < ApplicationController
     
     job_data = params['job'].reject{|k,v| k === '_resolved'} 
     job_data["repo_id"] ||= session[:repo_id] 
-    job_data["owner_code"] = params["fetch_urn_job"]["owner_code"]
+    job_data["owner_code"] = params["fetch_urn_job"]["owner_code"].upcase
     job_data["source"] = params["fetch_urn_job"]["ref"]
     refarray = params["fetch_urn_job"]["ref"].split("/")
     job_data["resource_id"] = refarray[-1]
