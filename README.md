@@ -42,6 +42,12 @@ Setup
     AppConfig[:nrs_url] = <NRS BASE URL>
     AppConfig[:olivia_url] = <OLIVIA BASE URL
     ```
+    
+* To use LOM, users must have permission to:
+	* create/update resources in this repository
+	* create/update digital objects in this repository
+	* initiate import jobs
+	* cancel an import job
 
 Known Issues
 -------------
