@@ -27,7 +27,7 @@ class LinkomaticController < ApplicationController
       render :json => response.to_json
     else
       Rails.logger.error("You do not have sufficient permissions to perform this task. Please contact your ASpace administrator.")
-      response = 'You do not have sufficient permissions to perform this task. Please contact your ASpace administrator.'
+      response = {error: 'You do not have sufficient permissions to perform this task. Please contact your ASpace administrator.'}
       render :json => response.to_json
     end
     
