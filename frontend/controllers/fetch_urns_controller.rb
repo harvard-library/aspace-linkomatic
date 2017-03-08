@@ -23,19 +23,11 @@ Rails.logger.info(job_data)
       @job = e.invalid_object
       @job_types = ['fetch_urn_job']
       @job_type = params['job']['job_type']
-      
-      if params[:iframePOST] # IE saviour. Render the form in a textarea for the AjaxPost plugin to pick out.
-        return render_aspace_partial :partial => "jobs/form_for_iframepost", :status => 400
-      else
-        return render_aspace_partial :partial => "jobs/form", :status => 400
-      end
+      Rails.logger.erro(e.to_String())
+      return render_aspace_partial :partial => "jobs/form", :status => 400
     end
       
-    if params[:iframePOST] # IE saviour. Render the form in a textarea for the AjaxPost plugin to pick out.
-      render :text => "<textarea data-type='json'>#{job.upload.to_json}</textarea>"
-    else
-      render :json => job.upload
-    end
+    render :json => job.upload
 
   end
 

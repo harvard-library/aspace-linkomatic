@@ -16,14 +16,22 @@ $(function () {
 	            type: "GET",
 	            data: {resource_id: resource_id, other: $("#owner_code_text").val()},
 	            dataType: "json",
-	            success: function(data) {
-	            	attachFetchClickHandler();
-	            	var fetch_dialog_content = AS.renderTemplate("fetch_digital_objects_results_template", data);
-	            	var $fetchmodal = AS.openCustomModal("fetchDigitalObjectsResultsModal", "Fetch Digital Objects Results", fetch_dialog_content, 'small', {backdrop: 'static', keyboard: false});
-	            	$owner_code_modal.hide();
-	            },
 	            error: function(xhr, status, err) {
+	            	$("#fetchProgress").html(xhr.responseText);
 	            	$("#fetchProgress").show();
+	            },
+	            complete: function(xhr, status) {
+	            	var response = JSON.parse(xhr.responseText);
+	            	if (response.success) {
+	            		attachFetchClickHandler();
+	            		var fetch_dialog_content = AS.renderTemplate("fetch_digital_objects_results_template", response.success);
+	            	 	var $fetchmodal = AS.openCustomModal("fetchDigitalObjectsResultsModal", "Fetch Digital Objects Results", fetch_dialog_content, 'small', {backdrop: 'static', keyboard: false});
+	            	  	$owner_code_modal.hide();
+	            	}
+	            	else if (response.error){
+	            		$("#fetchProgress").html(response.error);
+	            		$("#fetchProgress").show();
+	            	}
 	            }
 	          });
 	    	
