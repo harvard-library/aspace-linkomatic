@@ -24,6 +24,8 @@ Requirements
 Setup
 -----
 
+* Place the plugin in the archivesspace/plugins directory
+
 * Edit config.rb to:
 	* activate the `aspace-linkomatic` plugin
 	For example, in config.rb:
@@ -42,6 +44,8 @@ Setup
     AppConfig[:nrs_url] = <NRS BASE URL>
     AppConfig[:olivia_url] = <OLIVIA BASE URL
     ```
+
+* First time setup: run scripts/setup-database.sh to add the new enumeration to the ASpace table.
     
 * To use LOM, users must have permission to:
 	* create/update resources in this repository
