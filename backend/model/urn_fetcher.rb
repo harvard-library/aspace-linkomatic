@@ -72,8 +72,7 @@ class URNFetcher
               Log.info('ARCHIVAL OBJECT RETRIEVED: '+archival_object.to_json)
               #create digital object
         
-              if (@count % 15 == 0 || @count % 16 == 0 ||
-                      @count % 17 == 0 || @count % 18 == 0)
+              if (@count % 15 == 0)
                 Log.info("SLEEPING 30 SECS TO ALLOW TIME_WAITS TO CLEAR>>>>>")
                 sleep(30)
               end
