@@ -58,7 +58,9 @@ class URNFetcher
     osn_errors = []
     no_osn = []
     mutex = Mutex.new
+    @countMutex = Mutex.new
       
+    @count = 1
     workers = (0...4).map do
       thread = Thread.new do
         begin
@@ -69,6 +71,12 @@ class URNFetcher
               
               Log.info('ARCHIVAL OBJECT RETRIEVED: '+archival_object.to_json)
               #create digital object
+        
+              if (@count % 15 == 0 || @count % 16 == 0 ||
+                      @count % 17 == 0 || @count % 18 == 0)
+                Log.info("SLEEPING 30 SECS TO ALLOW TIME_WAITS TO CLEAR>>>>>")
+                sleep(30)
+              end
               t = create_digital_object(archival_object)
               mutex.synchronize do
                 if (t.has_key?('error'))
@@ -89,6 +97,7 @@ class URNFetcher
       end
       thread_array << thread
       thread.join
+      
     end
         
     response = {:resource_id => resource_id, :osn_errors=>osn_errors, :no_osns=>no_osn, :archival_objects_searched => archival_object_searched, :digital_objects_created => digital_objects_created}
@@ -106,6 +115,9 @@ private
   
   #Creates a digital object and link it to the archival object
   def create_digital_object(archival_object) 
+    @countMutex.synchronize do
+      @count = @count + 1
+    end
     osn = archival_object.ref_id
     
     begin
