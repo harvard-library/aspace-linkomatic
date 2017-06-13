@@ -2,8 +2,14 @@ class LinkomaticController < ApplicationController
  
   #require 'urn_fetcher'
   #skip_before_filter :unauthorised_access
-  set_access_control "view_repository" => [:fetch_digital_objects, :view_job]
+  set_access_control "view_repository" => [:fetch_digital_objects, :owner_code, :view_job]
   
+
+  # v2 replacement of the modal defined in v1's _tree.html.erb override
+
+  def owner_code
+    return render_aspace_partial :partial => "shared/owner_code_template"
+  end
   
     
   def fetch_digital_objects
