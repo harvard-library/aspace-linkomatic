@@ -87,7 +87,7 @@ $(function () {
 		});
 	};
 	$(document).bind("fetchdigitalshow.aspace", function(event) {
-		openOwnerCodeModal(resource_id); 
+		openOwnerCodeModal(); 
 	    });
     
 	$(document).bind("loadedrecordform.aspace", function(event, $container) {
