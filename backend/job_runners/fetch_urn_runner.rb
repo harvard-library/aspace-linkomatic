@@ -1,6 +1,9 @@
-require_relative 'urn_fetcher'
+require_relative '../../models/urn_fetcher'
   
 class FetchUrnRunner < JobRunner
+
+  register_for_job_type('fetch_urn_job',:run_concurrently => true)
+
 
   def self.instance_for(job)
     if job.job_type == "fetch_urn_job"
